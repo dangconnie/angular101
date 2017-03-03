@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="clickApp">
+<head>
+	
+	<title></title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+	<script type="text/javascript" src="clickController.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+<body style="margin-top: 60px;" ng-controller="clickController">
+	<!-- {{test}} -->
+
+	<div class="container">
+
+		<h1>Add new tasks</h1>
+		<input type="text" ng-model="taskFilter" placeholder="Filter tasks" />
+		<form ng-submit="submitHandler()">
+			<input ng-model="task" placeholder="task title">
+			<!-- this is angular!! if you do task-date, it sees it as a minus sign -->
+			<input type="date" ng-model="taskDate" placeholder="task date">
+			<input type="submit" class="btn btn-success" />
+		</form>
+
+		<h1>Task List</h1>
+		<!-- tasks in "tasks" array. track by index. filter and sort -->
+		<!-- track by index has to be at the end. easy filtering system!! -->
+		<li ng-repeat="task in tasks | filter: taskFilter | orderBy: 'name' track by $index ">
+			<ul>{{task.name}}</ul>
+			<li>{{task.date}}</li>
+		</li>
+
+		<hr />
+
+		<input ng-model="studentName" placeholder="Enter a student's name">
+		<hr />
+	</div>
+
+	<button class="btn btn-primary" ng-click="handleClick()">Click on me</button>
+
+	<li ng-repeat="student in students track by $index">
+	<!-- the index is like the key in react. otherwise, you can enter in more than one student -->
+		{{$index}}: {{student}}
+		<!-- {{students[$index]}} same thing! -->
+	</li>
+
+	<hr />
+	<button class="btn btn-danger" ng-click="clearStudents()">Clear students</button>
+
+
+</body>
+</html>
